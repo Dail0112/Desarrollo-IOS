@@ -1,0 +1,173 @@
+import UIKit
+import Foundation
+//enum: conjunto de valoers relacionados
+//semantica de valor muy parecido al de los structs
+
+//enum Diasdelasemana: Int, CaseIterable
+//{
+    
+    //case lunes,martes,miercoles,jueves,viernes,sabado,domingo // caso lineal
+    //case lunes = "Lunes"
+    //case martes = "Martes"
+    //case miercoles = "Miercoles"
+    //case jueves = "Jueves"
+    //case viernes = "Viernes"
+    //case sabado = "Sabado"
+    //case domingo = "Domingo"
+    
+    //case lunes
+    //case martes
+    //case miercoles
+    //case jueves
+    //case viernes
+   //case sabado
+    //case domingo
+    
+    //var nombre: String
+    //{
+     //   switch self
+      //  {
+     //   case .lunes:
+     //       return "Lunes"
+     //   case .martes:
+     //       return "Martes"
+     //   case .miercoles:
+      //      return "Miescoles"
+      //  case .jueves:
+      //      return "Jueves"
+      //  case .viernes:
+      //      return "Viernes"
+      //  case .sabado:
+       //     return "Sabado"
+      //  case .domingo:
+       //     return "Domingo"
+       // }
+    //}
+   // func obtenerPosicion() -> Int{
+    //    self.rawValue
+   // }
+
+//}
+//let dia: Diasdelasemana = .lunes
+//print(dia.nombre)
+//for dia in Diasdelasemana.allCases{
+  //  print(dia.obtenerPosicion())
+//
+//\\
+//let diadelasemana:Diasdelasemana = .jueves
+//print(diadelasemana.rawValue)
+
+//print(Diasdelasemana.allCases)
+//for dia in Diasdelasemana.allCases {
+//    print(dia.rawValue)
+//}
+//enum moneda{
+//    case euro
+//    case yen
+//    case libra
+//    
+//    var tasaDeCambio: Double{
+//        switch self {
+//        case .euro:
+//            return 0.05
+//        case .yen:
+//            return 110.0
+//        case .libra:
+//            return 0.75
+//        }
+//    }
+//    var simbolo: String {
+//        switch self {
+//        case .euro:
+//            return "€"
+//        case .yen:
+//            return "¥"
+//        case .libra:
+//            return "£"
+//        }
+//    }
+//    
+//    func convertirDesdeDolares(CantidadEnDolares: Double) -> Double{
+//        CantidadEnDolares * self.tasaDeCambio
+//    }
+//    func CantidadFormateada(cantidad: Double) -> String{
+//        "\(self.simbolo)\(cantidad)"
+//    }
+//}
+//
+//let cantidadEnDolares =  100.00
+//let euro: moneda = .euro
+//let cantidadEnEuros = euro.convertirDesdeDolares(CantidadEnDolares: cantidadEnDolares)
+//let cantidadFormateada = euro.CantidadFormateada(cantidad: cantidadEnEuros)
+//
+//enum OperacionesMatematicas{
+//    case suma
+//    case resta
+//    case multiplicacion
+//    case division
+//    
+//    class OperadorMatematico{
+//        static func RealizarOperacion(a: Double,b: Double, operacion:OperacionesMatematicas) -> Double{
+//            switch operacion {
+//            case .suma:
+//                return a+b
+//            case .resta:
+//                return a-b
+//            case .multiplicacion:
+//                return a*b
+//            case .division:
+//                if: b!=0
+//                    return a/b
+//                else
+//                    print("error: division por 0")
+//                    return 0
+//                    
+//            }
+//        }
+//    }
+//}
+
+//protocol DowloadDelegate{
+//    func didStartDowload()
+//    func didFinishDowload()
+//}
+//
+//class Dowloader {
+//    var dowloadDelegate: DowloadDelegate?
+//    
+//    func startDowload() {
+//        dowloadDelegate?.didStartDowload()
+//        //hace otras cosas
+//        //Mostrar loading view
+//        //persistir datos
+//        dowloadDelegate?.didStartDowload()
+//        
+//    }
+//}
+//
+//class DowloadMana
+
+enum EstadoPedido {
+    case procesando
+    case enviado
+    case entregado
+    
+}
+protocol NotificacionPedido{
+    func NotificarCambioDeEstado(nuevoEstado: EstadoPedido) -> Void
+    }
+class Pedido {
+    var estado: EstadoPedido
+    var delegado: NotificacionPedido?
+    
+    init(estado: EstadoPedido, delegado: NotificacionPedido? = nil) {
+        self.estado = estado
+        self.delegado = delegado
+    }
+    func cambiarEstado(nuevoEstado: EstadoPedido){
+        estado = nuevoEstado
+        if (delegado != nil){
+            delegado!.NotificarCambioDeEstado(nuevoEstado: nuevoEstado)
+        }
+    }
+}
