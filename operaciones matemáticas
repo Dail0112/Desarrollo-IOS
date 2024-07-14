@@ -1,0 +1,43 @@
+import UIKit
+
+enum OperacionMatematica //definimos las operacion en una ennumeracion
+{
+    case suma //casos
+    case resta
+    case multiplicacion
+    case division
+}
+
+class OperadorMatematico //definimos la clase operador matematico
+{
+    static func realizarOperacion(a:Double, b:Double, operacion:OperacionMatematica) -> Double //definimos una funcion estatica  y le damos los valores y la salida decimales ambos
+    {
+        switch operacion //hacemos un switch para cada caso y  retorne el resultado
+        {
+        case .suma:
+            return a+b
+        case .resta:
+            return a-b
+        case .multiplicacion:
+            return a*b
+        case .division: //hacemos las validaciones para que se puedan  realizar las diviosiones crrectas
+            if b != 0 && b > 0
+            {
+                return a/b
+            }
+            else
+            {
+                print("Error: division por 0")
+                return 0
+            }
+        
+        }
+    }
+}
+
+//ejemplo de uso
+var resultadoSuma = OperadorMatematico.realizarOperacion(a: 10.0, b: 5.0, operacion: OperacionMatematica.suma) //mandamos a llamara la funcion le damos los parametros requeridos
+print("El resultado de la suma: \(resultadoSuma)")//mostramos el resultado  de la suma
+
+var resultadoDivision = OperadorMatematico.realizarOperacion(a: 10.0, b: 0.0, operacion: OperacionMatematica.resta) //hacemos lo mismo pero en  este caso para la division
+print("El resultado de la Division: \(resultadoDivision)")
