@@ -1,0 +1,45 @@
+import UIKit
+
+func SumaMatrices(MatrizA: [[Int]], MatrizB: [[Int]]) -> [[Int]]? //funcion suma de matrices, sus parametros son [[int]] arreglos de arreglos que tienen una salida wue puede ser del mismo tipo (arreglo de arreglos) o nil
+{
+    if (MatrizA.count != MatrizB.count || MatrizA[0].count != MatrizB[0].count)//validacion de las filas y columnas de las matrices
+    {
+        print("Las matrices no pueden ser sumadas")
+        return nil
+    }
+    var matrizResultado = MatrizA //guarda el mismo valor que la matriz A
+    
+    for i in  0..<MatrizA.count //bucle que itera sobre las filas y columnas de las matrices
+    {
+        for j in 0..<MatrizA[i].count
+        {
+            matrizResultado[i][j] = MatrizA[i][j] + MatrizB[i][j] //suma de las matrices
+        }
+    }
+    return matrizResultado
+}
+
+
+func MultiplicacionMatrices(MatrizA: [[Int]], MatrizB: [[Int]]) -> [[Int]]? //funcion que multiplica matrices,sus parametros son [[int]] arreglos de arreglos que tienen una salida wue puede ser del mismo tipo (arreglo de arreglos) o nil
+{
+var matrizResultado: [[Int]] = Array(repeating: Array(repeating: 0, count: MatrizA[0].count), count: MatrizA.count)
+//array repeating:count crea un arreglo con un valor repetido varias veces, repeating: valor que se repetira, counting: las veces que se  repetira
+for i in 0..<MatrizA.count //itera sobre cada fila de matriz A
+{
+    for j in 0..<MatrizB.count //itera sobre cada columna de matriz B
+    {
+        for k in 0..<MatrizA[0].count
+        {
+            matrizResultado[i][j]  = matrizResultado[i][j] + (MatrizA[i][k] * MatrizB[k][j]) //la multiplicacion
+        }
+    }
+    
+}
+return matrizResultado
+}
+
+var suma = SumaMatrices(MatrizA: [[1,2],[3,4]], MatrizB: [[5,6],[7,8]])
+print("La suma  de las matrices es: \(String(describing: suma))")
+
+var producto = MultiplicacionMatrices(MatrizA: [[1,2],[3,4]], MatrizB: [[5,6],[7,8]])
+print("El producto de las matrices es \(String(describing: producto))")
