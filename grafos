@@ -1,0 +1,62 @@
+import UIKit
+
+class Grafo //definimos una clase grafo
+{
+    var adjList: [Int: [Int]] //le damos una propiedad que es un diccionario las claves son nodos del grafo Int y los valores son arrays de nodos adyacentes, representando las aristas del grafo.
+    
+    init() //constructor de la clase grafo inicializa adjList como un diccionario  vacio
+    {
+        self.adjList = [Int:[Int]]() //slf distingue la  propiedad del parametro, se refiere a la instancia actual del objeto
+    }
+    
+    func agregarArista(from: Int, to:Int) //Define un metodo que agrega una arista del nodo from al nodo to
+    {
+        if (adjList[from]) == nil //si from no tiene entrada en el diccionario lo crea con unn array vacio
+        {
+            adjList[from]  = [Int]()
+        }
+        adjList[from]?.append(to) //agrega to a la lista de nodos adyacentes de from
+    }
+    
+    func dfs(inicio: Int) -> [Int] //define  un metodo llamado dfs que toma un nodo inicio y devuelve una lista de enteros que representan el recorrido
+    {
+        var visitados = Set<Int>() //Crea un conjunto para llevar un registro de los nodos visitados durante el dfs
+        var resultado = [Int]() //Crea una lista vacía para almacenar el resultado del recorrido
+        dfsUtil(nodo: inicio, visitados: &visitados, resultado: &resultado) //llama a la funncion auxiliar que esta mas abajo para realizar el dfs
+        return resultado
+    }
+    
+    private func dfsUtil(nodo:Int, visitados: inout Set<Int>, resultado: inout [Int]) //definimos esta funncion auxiliar, ocupamos inout para modificar los argumentos directamente
+    {
+        visitados.insert(nodo) //marca el nodo como visitado
+        resultado.append(nodo)//añada el nodo al resultado del recorrido
+        
+        if let vecinos = adjList[nodo] //obtienen la lista de nodos adyacentes
+        {
+            for vecino in vecinos //itera sobre los nodos vecinos
+            {
+                if (!visitados.contains(vecino)) //si el nodo no dfue visitado llamamos  a dfsutil
+                {
+                    dfsUtil(nodo: vecino, visitados: &visitados, resultado: &resultado)
+                }
+            }
+        }
+    }
+}
+
+//creamos unna nueva instancia de grafo
+let grafo = Grafo()
+
+// Agregar aristas al grafo
+grafo.agregarArista(from: 1, to: 2) //llamamos al metodo agregararista para agregar aristas y nodos
+grafo.agregarArista(from: 1, to: 3)
+grafo.agregarArista(from: 2, to: 4)
+grafo.agregarArista(from: 2, to: 5)
+grafo.agregarArista(from: 3, to: 6)
+grafo.agregarArista(from: 3, to: 7)
+grafo.agregarArista(from: 4, to: 8)
+grafo.agregarArista(from: 5, to: 9)
+grafo.agregarArista(from: 6, to: 10)
+
+let recorridoDFS = grafo.dfs(inicio: 1) //llamamos al dfs desde el nodo 1 y elmacena el corrido en la constante que creamos
+
