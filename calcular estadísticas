@@ -1,0 +1,35 @@
+import UIKit
+
+func calcularEstadisticas(numeros: [Int]) ->(media:Double, mediana: Double, moda: Int?) //funcion que toma unn argumento de arreglos de numeros enteros, retorna una tupla con tres valores y el  tipo de valor que retornan
+{
+    let suma = numeros.reduce(0, +) //constante suma utiliza un metodo reduce para sumar los elementos en  el arreglo empezando por 0, el resultado es la suma del arreglo
+    //.reduce para sumar valores un array
+    let media = Double(suma) / Double(numeros.count) // constante que pasa los valores de la division a decimales para asegurarse de que sea una division entera
+    //.count cuenta el numero de elementos del arreglo
+    
+    let numerosOrdenados = numeros.sorted() // se declara una constante con los numeros ordenados en orden ascendente
+    //.sorted ordena arrays en orden ascendente y devuelve un nuevo arreglo con estos valores ordennados
+    
+    let mediana: Double //constante mediana de tipo decimal
+    if numerosOrdenados.count % 2 == 0 // si es par
+    {
+        mediana = Double(numerosOrdenados[numerosOrdenados.count / 2 - 1] + numerosOrdenados[numerosOrdenados.count / 2] / 2)
+    }
+    else //si no es par
+    {
+        mediana = Double(numerosOrdenados[numerosOrdenados.count / 2])
+    }
+    var frecuencia: [Int: Int] = [:] //diccionnario donde sus claves son enteras y el diccionario esta inicializado como vacio
+    
+    for numero in numeros // itera en cada elemento del arrreglo numeros
+    {
+        frecuencia[numero, default:0] += 1 //actualizamos el diccionario frecuencia, el conteo empieza en 0 y va incrementando
+    }
+    let moda = frecuencia.max { $0.value < $1.value}?.key //constante moda, busca el mayor valor en frecuencia, accede a la  primera y segunda entrada del diccionario y busca su valor luego los compara para ver cual es mas alto, es de tipo opcional porque puede devolver nil si el diccionario esta vacio y el .key accede a la clave del par maximo encontrado que es el numero que aparece mas veces en el arreglo
+    return (media, mediana, moda)
+}
+
+let estadisticas = calcularEstadisticas(numeros: [1,2,2,3,4,4,4,5]) // declaramos una constante estadisticas, llamamos a  la funcion y le damos un  arreglo de numeros
+print("media: \(estadisticas.media)") // mostramos la media, mediana y moda
+print("mediana: \(estadisticas.mediana)")
+print("moda: \(String(describing: estadisticas.moda))") //String(describing:) para convertir el valor opcional moda a cadena por lo que si moda es nil imprimirá nil en lugar de  dar error
