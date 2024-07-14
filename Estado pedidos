@@ -1,0 +1,47 @@
+import UIKit
+
+enum EstadoPedido //declaramos un enum y sus clases
+{
+    case procesando
+    case ennviado
+    case entregado
+}
+
+protocol NotificacionPedido //declaramos un protocolo
+{
+    func NotificarCambioDeEstado(nuevoEstado:EstadoPedido) -> Void //es nuestro metodo  obligatorio que recibe un nuevo estado de tipo estado pedido y no devuelve ningun valor
+}
+
+class Pedido //definimos una clase pedido
+{
+    var estado: EstadoPedido //definimos un estado de tipo Estado pedido
+    var delegado: NotificacionPedido? //definimos un delegado  de tipo notificacion pedido, es opcional y maneja la notificacion del cambio de estado
+    
+    init(estado: EstadoPedido) //inicializador de la clase
+    {
+        self.estado = estado //estado  inicial del pedido
+    }
+    
+    func CambiarEstado(nuevoEstado:EstadoPedido) //metodo para cambiar el  estado del pedido
+    {
+        estado = nuevoEstado //actualiza el pedido al nuevo estado
+        if (delegado != nil)//verifica si hay delegadoo asignado
+        {
+            delegado?.NotificarCambioDeEstado(nuevoEstado: .entregado) //llama al metodo del delegado para notoficar el cambio de estado
+        }
+    }
+}
+
+class GestorPedido: NotificacionPedido //gestor pedido debe de implementar todos los   metodos de NotificacionPedido al ser una clase que se adapta a este protocolo
+{
+    func NotificarCambioDeEstado(nuevoEstado: EstadoPedido) {
+        print("El estado del pedido ha cambiado a: \(nuevoEstado)") //se impreme el cambio de estado
+    }
+}
+
+
+//Ejemplo de uso
+var gestor = GestorPedido() //se crea  una instancia de  gestor pedido
+var pedido = Pedido(estado: EstadoPedido.procesando)// se crea una instancia conn el estado inicial
+pedido.delegado = gestor //asigna a delegado a gestor como delegado del pedido
+pedido.CambiarEstado(nuevoEstado:EstadoPedido.ennviado) //imprimira que el estado ha cambiado
