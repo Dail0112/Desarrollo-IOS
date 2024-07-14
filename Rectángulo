@@ -1,0 +1,19 @@
+import UIKit
+
+struct Rectangulo //definimos una estructura
+{
+    var ancho: Double //tiene propiedades ancho y alto de tipo decimal
+    var alto: Double
+    
+    func calcularArea() -> Double //definimos una funcion que calcula el area la cual retorna un  double
+    {
+        return ancho * alto //retorna el ancho por alto lo que es equivalente al area
+    }
+    func calcularPerimetro() -> Double //lo mismo con la funcion perimetro
+    {
+        return 2 * (ancho + alto)
+    }
+}
+
+let miRectangulo = Rectangulo(ancho: 5.0, alto: 10.0) //llamamos a la funcion y le damos valores y esto lo guardamos dentro de una variable
+print("Area: \(miRectangulo.calcularArea()), Perimetro: \(miRectangulo.calcularPerimetro())")  //mostramos el resultado de estas
