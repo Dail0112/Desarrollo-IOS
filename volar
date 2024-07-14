@@ -1,0 +1,29 @@
+import UIKit
+
+protocol volable //definimos un protocolo  volable
+{
+    func volable() -> String //y una funcion volable  que retorna una cadena de caracteres
+}
+
+class pajaro //definimos dos clases, pajaro y  avion que tienen dentro una funcion volar que retorna una cadena de caracteres
+{
+    func volar() -> String
+    {
+        return "El pajaro esta volando"  //en estos casos  decir  que estan volando
+    }
+}
+
+class avion
+{
+    func volar() -> String
+    {
+        return "El pajaro esta volando"
+    }
+}
+
+var miPajaro = pajaro() //definimos dos variables que acceden a la clase  pajaro y avion respectivamente
+var miAvion = avion()
+
+print(miPajaro.volar()) //se imprimen las variables que  definimos anteriormente
+print(miAvion.volar())
+

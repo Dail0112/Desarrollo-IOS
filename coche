@@ -1,0 +1,22 @@
+import UIKit
+
+class coche //definimos una clase coche
+{
+    var marca:String //sus propiedades  son la marca, el modelo y el año
+    var modelo:String
+    var año: Int
+    
+    init(marca:String,modelo:String,año:Int) //inicializador de la clase
+    {
+        self.marca = marca //asignamos el valor del parametro a la propiedad del objeto
+        self.modelo  = modelo
+        self.año = año
+    }
+    func describir() -> String //metodo de la clase que devuelve la descripcion del  coche como string
+    {
+        return "coche: \(marca) \(modelo), \(año)" //cadena que retorna la descripcion del coche con sus propiedades
+    }
+}
+
+let miCoche = coche(marca: "Toyota", modelo: "Corolla", año: 2020) // creamos una variable que guarde los valores de la llamada a la funcion
+print(miCoche.describir())  //imprimimos las propiedadd que estan en describir 

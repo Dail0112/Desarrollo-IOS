@@ -1,0 +1,21 @@
+import UIKit
+
+func SumaRecursiva(n:Int) ->  Int  //definimos una funcion suma recursiva va a tomar un entero como parametro y su resultado tambien sera un entero
+{
+    return n ==  0 ? 0 : n + SumaRecursiva(n: n - 1) // caso base de recursion, si n no es 0 retorna n mas el resultado de llamar a la  funcion
+}
+
+func SumaIterativa(n:Int) -> Int //definimos una funcion suma iterativa, toma un entero  como parametro y tambien lo retorna
+{
+    var suma = 0  //inicializamos suma en 0, acumulara la suma
+    for i in 1...n //itera en cada uno de los elemento desde 1 a n
+    {
+        suma += i //acumula la suma
+    }
+    return suma
+}
+
+let ResultadoRecursivo = SumaRecursiva(n: 10) //en una variable guardamos el resultado de  mandar a llamar a cada una de las funciones y darle un valor de 10
+let ResultadoIterativo = SumaIterativa(n: 10)
+print("Suma recursiva: \(ResultadoRecursivo)") //mostramos cada uno de los resultados
+print("suma iterativa: \(ResultadoIterativo)")

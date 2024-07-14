@@ -1,0 +1,26 @@
+import UIKit
+
+func ordenarPorSeleccion(array: inout[Int]) //funcion arreglo de enteros
+//inout es un modificador que permite  que cualquier cambio hecho dentro del  arreglo  se refleje tanto adentro como afuera
+{
+    let n = array.count //n es el  numero de elementos del arreglo
+    for i in 0..<n // bucle que itera desde 0 hasta n-1
+    {
+        var minIndex = i  // guarda el indice del elemento minimo encontrado hasta ahora
+        for j in i+1..<n //recorre los elementos del array desde i+1  hasta n-1 para comparar elementos posteriores y encontrar el menor
+        {
+            if array[j] < array[minIndex] // verifica si el elemento actual de [j] es el mismo que minindex
+            {
+                minIndex = j
+            }
+        }
+        if i != minIndex  //verifica si el indice del elemento minnimo es i si es asi hace un intercambio con min index
+        {
+            array.swapAt(i, minIndex) //swapAt intercambia elementos  entre posiciones en este caso i con minIndex
+        }
+    }
+}
+
+var numeros = [64, 25, 12, 22, 11, 90] //declaramos una variable y creamos un arreglo de numeros
+ordenarPorSeleccion(array: &numeros) //llamamos a la funcion y le pasamos como argumento inout el arreglo asi que es  el que se modificara directamente
+print("Array ordenado por seleccion: \(numeros)") //muestra el arreglo ya ordenado
