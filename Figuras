@@ -1,0 +1,44 @@
+import UIKit
+
+protocol figura //creamos un protocolo figura que tiene un metodo calcular area que tiene una salida decimal
+{
+    func calcularArea() -> Double
+}
+
+struct Cuadrado:figura //creamos dos estructuras de tipo figura
+
+{
+    var lado: Double //declaramos sus variables
+    
+    func calcularArea() -> Double { //implementamos el metodo calcular area
+        return lado * lado //retornamos  el area
+    }
+}
+
+struct Rectangulo:figura
+{
+    var ancho: Double//declaramos sus variables
+    var alto: Double
+    
+    func calcularArea() -> Double { //implementamos el metodo calcular area
+        return ancho * alto  //retornamos  el area
+    }
+}
+
+func calcularAreaTotal(figuras:[figura]) -> Double //tom un arreglo que se adaptan al protocolo figura y devuelve el area total en decimales
+{
+    var areaTotal = 0.0 //acumula el area de las  figuras
+    for figura in figuras  //itera sobre cada uno de los elementos de figuras
+    {
+        areaTotal = areaTotal + figura.calcularArea() //llama al metodo calcular area en cada figura y suma el resultado al areatotal
+    }
+    return areaTotal  //devuelve el areatotal
+}
+
+//ejemplo de uso
+var cuadrado = Cuadrado(lado: 4.0) //creamos una instancia llamada cuadrado y  rectangulo y le damos valores
+var rectangulo = Rectangulo(ancho: 3.0, alto: 5.0)
+var figuras: [figura] = [cuadrado,rectangulo]  //creamos un arreglo que los contiene
+
+var areaTotal = calcularAreaTotal(figuras: [cuadrado,rectangulo]) //llamamos a la funcion y  le pasamos el arreglo y guarda el resultado en area total
+print("Area total: \(areaTotal)") //imprimimos area  total

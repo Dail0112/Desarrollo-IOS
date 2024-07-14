@@ -1,0 +1,48 @@
+import UIKit
+
+protocol Empleado //definimos un protocolo Empleado
+{
+    func calcularSalario() -> Double //definimos una funcion calcular salario
+}
+
+class EmpleadosBase: Empleado //definimos uan clase empleadosBase de tipo Empleado
+{
+    var salarioBase: Double //declaramos una variable decimal que guardara el salario base
+     
+    init(salarioBase:Double)//inicializamos la clase que establece el valor de salario base cuando se crea una instancia de la clase
+    {
+        self.salarioBase = salarioBase
+    }
+    
+    func calcularSalario() ->Double //implimentamos el metodo del protocolo empleado
+    {
+        return salarioBase //devolvemos el salario base
+    }
+}
+
+struct EmpleadoConntrato: Empleado //creamos otra estructura esta vez para el contrato igualmente de tipo empleado
+{
+    var TarifaHora:Double //definimos la tarifa de la hora y el numero de  horas tabajadas
+    var HorasTrabajadas:Double
+    
+    func calcularSalario() -> Double { //ocupamos el metodo del protocolo y retornamos el salario
+        return TarifaHora*HorasTrabajadas
+    }
+}
+
+func calcularSalarioTotal(empleados: [Empleado])  -> Double //creamos una funcion para calcular el salario total el cual es un arreglo de tipo empleado, su salida seran decimales
+{
+    var salarioTotal = 0.0  //definimos unn contador  que guardara el salario total
+    for empleado in empleados //iteramos dentro de empleados
+    {
+        salarioTotal = salarioTotal + empleado.calcularSalario() //sumamos el salario de cada empleado para obtener el salario total actualizado
+    }
+    return salarioTotal
+}
+
+var empleadoBase = EmpleadosBase(salarioBase: 3000.0) //creamos una instancia con un salario base de 3000
+var empleadoContrato = EmpleadoConntrato(TarifaHora: 20.0, HorasTrabajadas: 100) //creamos una instancia de empleado con tarifa por hora y horas trabajadas
+var empleados: [Empleado] = [empleadoBase,empleadoContrato]//creamos una instancia que contiene las instancias creadas
+
+var salarioTotal = calcularSalarioTotal(empleados: empleados) //llamamos a la funcionn calcular salario con el array empleados
+print("Salario total: \(salarioTotal)")//mostramos el salario total
