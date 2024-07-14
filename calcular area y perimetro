@@ -1,0 +1,16 @@
+import UIKit
+
+//calcular el area  y perimetro de un rectangulo
+func calcularAreayPerimetro(ancho:Double, alto:Double) -> (area:Double, perimetro:Double) //funcion para calcular el area
+//y el perimetro, se definen las entradas de la funcion y los procedimientos que hacemos dentro de la funcion y el tipo de
+//valor que retornan
+{
+    let area = ancho * alto //definimos una variable area y el valor que tendra
+    let perimetro = 2*(area + alto) // lo mismo con el perimetro
+    return (area, perimetro) // valores que retorna la  funcion
+}
+
+let resultado = calcularAreayPerimetro(ancho: 5, alto: 10) //a nuestra funcion le pasamos valores y esto lo guardamos  dentro
+//de una variable resultado
+print("Area:\(resultado.area)") //imprimimos los resultados
+print("Perimetro:\(resultado.perimetro)")
