@@ -1,0 +1,77 @@
+//
+//  ViewController.swift
+//  visualcomponents
+//
+//  Created by LABORATORIO MAC UAM on 27/7/24.
+//
+
+import UIKit
+
+class ViewController: UIViewController {
+    @IBOutlet weak var myFirstLabel: UILabel!
+    
+    @IBOutlet weak var mySwitch: UISwitch!
+    
+    @IBOutlet weak var myBuytton: UIButton!
+    
+    @IBOutlet weak var mySegmentedControl: UISegmentedControl!
+    
+    @IBOutlet weak var myPageControl: UIPageControl!
+    
+    @IBOutlet weak var myStepper: UIStepper!
+    
+    @IBOutlet weak var labelStepper: UILabel!
+    
+    private let values  = ["uno", "dos", "tres", "cuatro", "cinco"]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        mySegmentedControl.removeAllSegments()
+        for (index,value) in values.enumerated() {
+            mySegmentedControl.insertSegment(withTitle: value, at: index, animated: true)
+        }
+        
+        myFirstLabel.text = "cambio de Label"
+        
+        myPageControl.numberOfPages = values.count
+        
+    }
+
+    @IBAction func cambioValor(_ sender: Any) {
+        myPageControl.currentPage = mySegmentedControl.selectedSegmentIndex
+    }
+    
+    @IBAction func mySegmentedControl(_ sender: Any) {
+        mySegmentedControl.selectedSegmentIndex = myPageControl.currentPage
+    }
+    
+    @IBAction func miPrimeraAccion(_ sender: Any) {
+//        myFirstLabel.textColor = .purple
+      // myFirstLabel.textColor =  UIColor(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
+        //personalizar el color CG float numero entre 0 y 1, dividiendo entre 255
+        myFirstLabel.textColor =
+        myFirstLabel.textColor == .blue ? .purple : .blue
+       
+    }
+    
+    @IBAction func mySwitch(_ sender: Any) {
+        
+        
+        if mySwitch.isOn {
+            myBuytton.tintColor = .cyan
+        }
+        else {
+            myBuytton.tintColor = .blue
+        }
+        
+    }
+    
+    @IBAction func accionLabel(_ sender: Any) {
+        labelStepper.text = "\(myStepper.value)"
+    }
+    
+    
+   
+}
+
